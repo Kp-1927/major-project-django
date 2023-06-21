@@ -6,3 +6,5 @@ from .models import AdvertismentBannerModel,AdvertismentsModel
 
 admin.site.register(AdvertismentBannerModel)
 admin.site.register(AdvertismentsModel)
+
+#trying#
