@@ -1,4 +1,5 @@
-from .serializers import ProductCategoryModelSerializer, ProductBrandModelSerializer, ProductColorModelSerializer, ProductDescriptionModelSerializer, ProductImageModelSerializer, ProductServiceModelSerializer, ProductVariationModelSerializer, ProductModelCreateSerializer, ProductModelListSerializer
+from .serializers import ProductCategoryModelSerializer, ProductBrandModelSerializer, ProductColorModelSerializer, ProductDescriptionModelSerializer, ProductImageModelSerializer, ProductServiceModelSerializer, ProductVariationModelSerializer, ProductModelCreateSerializer, ProductModelListSerializer,DashboardProductMainModelCreateSerializer,DashBoardProductMainModelListSerializer
+
 from ..models import ProductCategoryModel, ProductBrandModel, ProductColorModel, ProductDescriptionModel, ProductImageModel, ProductServiceModel, ProductVariationModel, ProductModel, ProductMainModel
 from rest_framework import generics, status
 from rest_framework.response import Response  
@@ -294,3 +295,12 @@ class DasboardProductModelListAPIView(generics.ListAPIView):
     serializer_class = ProductModelListSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_class = ProductFilter
+
+
+class DashboardProductMainModelCreateAPIView(generics.CreateAPIView):
+    queryset = ProductMainModel.objects.all()
+    serializer_class = DashboardProductMainModelCreateSerializer
+
+class DashboardProductMainModelListAPI(generics.ListAPIView):
+    queryset = ProductMainModel.objects.all()
+    serializer_class = DashBoardProductMainModelListSerializer

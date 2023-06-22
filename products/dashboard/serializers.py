@@ -144,3 +144,37 @@ class ProductModelCreateSerializer(serializers.ModelSerializer):
             instance.description.add(description_instance)
         return validated_data
     
+class DashboardProductMainModelCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductMainModel 
+        fields = "__all__"
+
+
+class DashBoardProductMainModelListSerializer(serializers.ModelSerializer):
+    
+    product=serializers.SerializerMethodField
+    variation = serializers.SerializerMethodField()
+    color = serializers.SerializerMethodField()
+    class Meta:
+        model = ProductMainModel
+        fields = "__all__"
+    
+    def get_variation(self, obj):
+        try:
+            data = ProductVariationModelSerializer(obj.variation, many=False).data
+        except:
+            data = []
+        return data 
+    
+    def get_color(self, obj):
+        try:
+            data = ProductColorModelSerializer(obj.color, many=False).data 
+        except:
+            data = []
+        return data 
+    def get_product(self, obj):
+        try:
+            data = ProductModelListSerializer(obj.product, many=False).data
+        except:
+            data = {}
+        return data
