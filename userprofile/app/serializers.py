@@ -4,21 +4,21 @@ from products.dashboard.serializers import DashBoardProductMainModelListSerializ
 
 
 
-class WebsiteUserWishListUpdateSerializer(serializers.ModelSerializer):
+class AppUserWishListUpdateSerializer(serializers.ModelSerializer):
     product_code = serializers.CharField()
     class Meta:
         model = UserWishListModel
         fields =  ["product_code"]
 
 
-class WebsiteUserCartListUpdateSerializer(serializers.ModelSerializer):
+class AppUserCartListUpdateSerializer(serializers.ModelSerializer):
     product_code = serializers.CharField()
     class Meta:
         model = UserCartModel
         fields =  ["product_code"]
     
 
-class WebsiteUserWishListSerializer(serializers.ModelSerializer):
+class AppUserWishListSerializer(serializers.ModelSerializer):
     products = serializers.SerializerMethodField()
     class Meta:
         model = UserWishListModel 
@@ -33,7 +33,7 @@ class WebsiteUserWishListSerializer(serializers.ModelSerializer):
     
 
 
-class WebsiteUserCartListSerializer(serializers.ModelSerializer):
+class AppUserCartListSerializer(serializers.ModelSerializer):
     products = serializers.SerializerMethodField()
     class Meta:
         model = UserCartModel 
@@ -47,12 +47,12 @@ class WebsiteUserCartListSerializer(serializers.ModelSerializer):
         return data  
 
 
-class WebsiteUserAddressModelListSerializer(serializers.ModelSerializer):
+class AppUserAddressModelListSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAddressModel 
         fields = "__all__"
 
-class WebsiteUserProfileModelUpdateSerializer(serializers.ModelSerializer):
+class AppUserProfileModelUpdateSerializer(serializers.ModelSerializer):
     address = serializers.SerializerMethodField()
     class Meta:
         model = UserProfileModel 
@@ -60,7 +60,7 @@ class WebsiteUserProfileModelUpdateSerializer(serializers.ModelSerializer):
 
     def get_address(self, obj):
         try:
-            data = WebsiteUserAddressModelListSerializer(obj.address.all(), many=True).data
+            data = AppUserAddressModelListSerializer(obj.address.all(), many=True).data
         except:
             data = []
         return data 

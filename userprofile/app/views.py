@@ -1,13 +1,13 @@
 from ..models import UserWishListModel, UserProfileModel, UserCartModel
 from products.models import  ProductMainModel, ProductModel
-from .serializers import WebsiteUserWishListUpdateSerializer, WebsiteUserWishListSerializer, WebsiteUserCartListUpdateSerializer, WebsiteUserCartListSerializer, WebsiteUserProfileModelUpdateSerializer
+from .serializers import AppUserWishListUpdateSerializer, AppUserWishListSerializer, AppUserCartListUpdateSerializer, AppUserCartListSerializer, AppUserProfileModelUpdateSerializer
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response 
 
 
-class WebsiteUserWishListUpdateAPIView(generics.GenericAPIView):
+class AppUserWishListUpdateAPIView(generics.GenericAPIView):
     queryset = UserWishListModel.objects.all()
-    serializer_class = WebsiteUserWishListUpdateSerializer 
+    serializer_class = AppUserWishListUpdateSerializer 
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -19,9 +19,9 @@ class WebsiteUserWishListUpdateAPIView(generics.GenericAPIView):
         return Response({"message" : "Added to Wishlist"}, status=status.HTTP_200_OK)
     
     
-class WebsiteUserWishListRemoveAPIView(generics.GenericAPIView):
+class AppUserWishListRemoveAPIView(generics.GenericAPIView):
     queryset = UserWishListModel.objects.all()
-    serializer_class = WebsiteUserWishListUpdateSerializer 
+    serializer_class = AppUserWishListUpdateSerializer 
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -35,9 +35,9 @@ class WebsiteUserWishListRemoveAPIView(generics.GenericAPIView):
 
 
 
-class WebsiteUserWishListAPIView(generics.ListAPIView):
+class AppUserWishListAPIView(generics.ListAPIView):
     queryset = UserWishListModel.objects.all()
-    serializer_class = WebsiteUserWishListSerializer
+    serializer_class = AppUserWishListSerializer
 
     def get_queryset(self):
         return UserProfileModel.objects.get(user=self.request.user).wishlist 
@@ -48,9 +48,9 @@ class WebsiteUserWishListAPIView(generics.ListAPIView):
 
 
 
-class WebsiteUserCartListUpdateAPIView(generics.GenericAPIView):
+class AppUserCartListUpdateAPIView(generics.GenericAPIView):
     queryset = UserCartModel.objects.all()
-    serializer_class = WebsiteUserCartListUpdateSerializer 
+    serializer_class = AppUserCartListUpdateSerializer 
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -62,9 +62,9 @@ class WebsiteUserCartListUpdateAPIView(generics.GenericAPIView):
         return Response({"message" : "Added to Cart"}, status=status.HTTP_200_OK)
     
     
-class WebsiteUserCartListRemoveAPIView(generics.GenericAPIView):
+class AppUserCartListRemoveAPIView(generics.GenericAPIView):
     queryset = UserCartModel.objects.all()
-    serializer_class = WebsiteUserCartListUpdateSerializer 
+    serializer_class = AppUserCartListUpdateSerializer 
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -77,9 +77,9 @@ class WebsiteUserCartListRemoveAPIView(generics.GenericAPIView):
     
 
 
-class WebsiteUserCartListAPIView(generics.ListAPIView):
+class AppUserCartListAPIView(generics.ListAPIView):
     queryset = UserCartModel.objects.all()
-    serializer_class = WebsiteUserCartListSerializer
+    serializer_class = AppUserCartListSerializer
 
     def get_queryset(self):
         return UserProfileModel.objects.get(user=self.request.user).cart 
@@ -89,9 +89,9 @@ class WebsiteUserCartListAPIView(generics.ListAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class WebsiteUserProfileModelUpdateAPIView(generics.GenericAPIView):
+class AppUserProfileModelUpdateAPIView(generics.GenericAPIView):
     queryset = UserProfileModel.objects.all()
-    serializer_class = WebsiteUserProfileModelUpdateSerializer
+    serializer_class = AppUserProfileModelUpdateSerializer
 
     def get(self, request):
         queryset = self.queryset.get(user=request.user)
