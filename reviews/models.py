@@ -12,13 +12,11 @@ class ProductReviewImageModel(models.Model):
 class ProductReviewModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="ProductReviewModel_user")
     product = models.ForeignKey(ProductMainModel, on_delete=models.CASCADE, related_name="ProductReviewModel_product")
-
     title = models.CharField(max_length=200, null=True, blank=True) #
     image = models.ManyToManyField(ProductReviewImageModel, related_name="ProductReviewModel_image", blank=True)
     description = models.TextField(blank=True, null=True)
     ratings = models.IntegerField(default=1)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
+ 
